@@ -1,12 +1,12 @@
 
-ifdef XCC
 # XCC - Cross Compiler
 CC = $(XCC)
-endif
 
+# XINC - Cross Include
 # Cross Compiler Flags
 CFLAGS  = -Wall -Werror -Wextra \
-	-ffreestanding -std=c11 -O2
+	-ffreestanding -std=c11 -O2 \
+	-I $(XINC)
 LDFLAGS = -T linker.ld -nostdlib \
 	-ffreestanding -O2 -o
 LDLIBS  = -lgcc

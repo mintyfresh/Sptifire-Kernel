@@ -1,17 +1,17 @@
 
 # define hang() for(;;)
 
-__attribute__((noinline))
-void testWrite(char ch) {
-	*((char *)0xC00B8000) = ch;
-}
+extern void writeString(char *);
+extern void setColor(char, char);
 
 void kmain(int magic, void *mboot) {
 	if(magic != 0x2BADB002) {
 		// TODO : Assert me.
 	}
 
-	testWrite('A');
+	setColor(0, 15);
+	writeString("Hello");
+
 	((void)mboot);
 
 	hang();
