@@ -5,7 +5,7 @@
 
 static int  xpos  = 0;
 static int  ypos  = 0;
-static char color = 0;
+static char color = 0x0F;
 
 typedef struct {
 	char ch;
@@ -52,16 +52,21 @@ void clear() {
 }
 
 void writeChar(char ch) {
-	int pos = xpos + ypos * xlim;
-	vram_data *data = &vram[pos];
-
-	data->ch = ch;
-	data->color = color;
-
-	// Increment position
-	if(xpos++ >= xlim) {
+	if(ch == '\n') {
 		xpos = 0;
 		ypos++;
+	} else {
+		int pos = xpos + ypos * xlim;
+		vram_data *data = &vram[pos];
+
+		data->ch = ch;
+		data->color = color;
+
+		// Increment position
+		if(xpos++ >= xlim) {
+			xpos = 0;
+			ypos++;
+		}
 	}
 
 	// Scroll if necessary

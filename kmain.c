@@ -1,14 +1,11 @@
 
+# include "kernel.h"
 # include "kscreen.h"
 
-# define hang() for(;;)
-
 void kmain(int magic, void *mboot) {
-	if(magic != 0x2BADB002) {
-		// TODO : Assert me.
-	}
+	// Validate multiboot magic
+	assert(magic == 0x2BADB002 + 1);
 
-	setColor(0, 15);
 	writeString("Hello");
 
 	((void)mboot);

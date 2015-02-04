@@ -15,6 +15,7 @@ LDLIBS  = -lgcc
 objects =			\
 	kstart.o		\
 	kmain.o			\
+	kernel.o		\
 	kscreen.o
 
 # Output files
