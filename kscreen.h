@@ -36,6 +36,10 @@ void setCursor(int xpos, int ypos);
 
 void kprintf(char *fmt, ...);
 
+void ksprintf(char *buffer, char *fmt, ...);
+
 void kvprintf(char *fmt, va_list args);
+
+void kvsprintf(char *buffer, char *fmt, va_list args);
 
 # endif /* kscreen.h */
