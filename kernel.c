@@ -8,13 +8,18 @@ void hang() {
 
 __attribute__((noreturn))
 void panic(char *text, char *file, int line) {
-	writeString("Kernel Panic!");
+	setColor(White, White);
+	clear();
 
-	// TODO
-	((void)text);
-	((void)file);
-	((void)line);
+	setCursor(34, 9);
+	setColor(Red, White);
+	kprintf(" Kernel Panic! \n\n");
 
+	setColor(White, Red);
+	kprintf("%s\n", text);
+	kprintf("In %s at line %d.\n", file, line);
+
+	__asm__("cli");
 	hang();
 }
 

@@ -12,6 +12,6 @@ void abort(char *text);
 
 # define assert(expr)			\
 	((void)((expr) ? 0 : panic(	\
-		#expr, __FILE__, __LINE__)))
+		"Assertion failed: " #expr, __FILE__, __LINE__)))
 
 # endif /* kernel.h */
