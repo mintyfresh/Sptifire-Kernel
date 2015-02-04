@@ -74,11 +74,11 @@ _start:
 	pushl %ebx # Multiboot Pointer
 	pushl %eax # Multiboot Magic
 
-	call kmain
+	leal (kmain), %ecx
+	call *%ecx
 
 _kHang:
 	hlt
-	cli
 	jmp _kHang
 
 # Kernel Stack
