@@ -1,11 +1,13 @@
 
+# include "kscreen.h"
+
 # define vram ((vram_data *)0xC00B8000)
 # define xlim 80
 # define ylim 25
 
 static int  xpos  = 0;
 static int  ypos  = 0;
-static char color = 0x0F;
+static char color = White;
 
 typedef struct {
 	char ch;
@@ -46,8 +48,10 @@ void scroll() {
 
 void clear() {
 	int pos;
-	for(pos = 0; pos < 4000; pos++) {
-		((char *)vram)[pos] = 0;
+	xpos = ypos = 0;
+	for(pos = 0; pos < xlim * ylim; pos++) {
+		vram[pos].ch = '\0';
+		vram[pos].color = color;
 	}
 }
 
@@ -79,7 +83,7 @@ void writeString(char *str) {
 }
 
 void setColor(char back, char fore) {
-	color = ((back << 4) & 0xF) | (fore & 0xF);
+	color = ((back & 0xF) << 4) | (fore & 0xF);
 }
 
 void setCursor(int _xpos, int _ypos) {

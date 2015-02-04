@@ -3,6 +3,25 @@
 
 # include <stdarg.h>
 
+enum Colors {
+	Black,
+	Blue,
+	Green,
+	Cyan,
+	Red,
+	Magenta,
+	Brown,
+	LightGrey,
+	DarkGrey,
+	LightBlue,
+	LightGreen,
+	LightCyan,
+	LightRed,
+	LightMagenta,
+	Yellow,
+	White
+};
+
 void clear();
 
 void writeChar(char ch);
