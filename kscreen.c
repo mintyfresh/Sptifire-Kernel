@@ -59,6 +59,12 @@ void writeChar(char ch) {
 	if(ch == '\n') {
 		xpos = 0;
 		ypos++;
+	} else if(ch == '\t') {
+		xpos = 8 - xpos % 8;
+		if(xpos >= ylim) {
+			xpos = 0;
+			ypos++;
+		}
 	} else {
 		int pos = xpos + ypos * xlim;
 		vram_data *data = &vram[pos];
