@@ -1,8 +1,7 @@
 
-# define hang() for(;;)
+# include "kscreen.h"
 
-extern void writeString(char *);
-extern void setColor(char, char);
+# define hang() for(;;)
 
 void kmain(int magic, void *mboot) {
 	if(magic != 0x2BADB002) {

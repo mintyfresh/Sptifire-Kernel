@@ -15,7 +15,7 @@ LDLIBS  = -lgcc
 objects =			\
 	kstart.o		\
 	kmain.o			\
-	kscreen.o		\
+	kscreen.o
 
 # Output files
 bin     = ./bin
