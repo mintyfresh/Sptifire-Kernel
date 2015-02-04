@@ -64,6 +64,7 @@ _startLow:
 .section .text
 .align 4
 
+.global _start
 _start:
 	movl $_stackStart, %esp
 

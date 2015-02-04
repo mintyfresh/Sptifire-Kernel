@@ -3,15 +3,20 @@ ENTRY(_startLow)
 
 SECTIONS {
 
+	. = 0x00100000;
+
 	_pstart = .;
 
-	. = 0xC0100000;
+	.mboot ALIGN(4) : AT(ADDR(.mboot)) {
+		*(.mboot)
+		*(.textlow)
+	}
+
+	. += 0xC0000000;
 
 	_vstart = .;
 
-	.text ALIGN(4) : AT(ADDR(.text) - 0xC0000000)  {
-		*(.mboot)
-		*(.textlow)
+	.text ALIGN(4) : AT(ADDR(.text) - 0xC0000000) {
 		*(.text)
 	}
 
