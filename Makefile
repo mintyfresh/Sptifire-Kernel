@@ -20,14 +20,22 @@ objects =			\
 # Output files
 bin     = ./bin
 kernel  = $(bin)/kernel.bin
+image   = $(bin)/kernel.iso
 
-all: $(kernel)
+all: $(image) $(kernel) $(objects)
 
 .PHONY: clean
 clean:
-	rm -f $(objects)
+	rm -rf $(objects) $(kernel) tmp
 
-$(bin)/%.bin: $(objects)
+$(image): $(kernel)
+	mkdir -p tmp/boot/grub
+	cp $(kernel) tmp/boot/kernel.bin
+	cp grub.cfg.template tmp/boot/grub/grub.cfg
+	grub-mkrescue -o $(image) tmp
+	rm -r tmp
+
+$(kernel): $(objects)
 	$(CC) $(LDFLAGS) $@ $^ $(LDLIBS)
 
 %.o: %.asm

@@ -1,0 +1,3 @@
+menuentry "Spitfire" {
+	multiboot /boot/kernel.bin
+}
