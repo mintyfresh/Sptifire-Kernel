@@ -17,7 +17,8 @@ objects =			\
 	kmain.o			\
 	kernel.o		\
 	kscreen.o		\
-	kprintf.o
+	kprintf.o		\
+	kgdt.o
 
 # Output files
 bin     = ./bin
