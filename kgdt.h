@@ -41,8 +41,8 @@
 	GDT_PRESENT | GDT_DATA_SELECTOR | GDT_RING_3 | GDT_READWRITE | \
 	GDT_PROTECTED_32 | GDT_PAGE_GRAN | GDT_ALWAYS_1)
 
-void gdt_install();
+void gdtInstall();
 
-void gdt_create(void *base, size_t limit, int flags);
+void gdtCreate(void *base, size_t limit, int flags);
 
 # endif /* kgdt.h */
