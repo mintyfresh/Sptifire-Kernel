@@ -20,7 +20,8 @@ objects =			\
 	kprintf.o		\
 	kgdt.o			\
 	kidt.o			\
-	kisrs.o
+	kisrs.o			\
+	khandles.o
 
 # Output files
 bin     = ./bin
@@ -31,7 +32,7 @@ all: $(image) $(kernel) $(objects)
 
 .PHONY: clean
 clean:
-	rm -rf $(objects) $(kernel) tmp
+	rm -rf $(objects) $(kernel) kisrs.asm tmp
 
 $(image): $(kernel)
 	mkdir -p tmp/boot/grub
@@ -42,6 +43,9 @@ $(image): $(kernel)
 
 $(kernel): $(objects)
 	$(CC) $(LDFLAGS) $@ $^ $(LDLIBS)
+
+kisrs.asm: kisrs.sh
+	sh kisrs.sh 33 > $@
 
 %.o: %.asm
 	$(AS) $< -o $@

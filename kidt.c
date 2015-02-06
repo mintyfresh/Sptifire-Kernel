@@ -21,19 +21,15 @@ static struct idt_descriptor entries[256];
 
 static int idx = 0;
 
-extern void _isr0();
-
-void testIsr() {
-	extern void writeString(char *);
-	writeString("It worked!\n");
-}
-
 void idtInstall() {
+	extern void *isrTable[];
 	extern void idtCommit();
+	int i = 0;
 
-	int i;
-	for(i = 0; i < 32; i++)
-	idtCreate(_isr0, 0x08, 0x8E);
+	// Register table
+	while(isrTable[i]) {
+		idtCreate(isrTable[i++], 0x08, 0x8E);
+	}
 
 	// Commit IDT structure
 	idtCommit();
