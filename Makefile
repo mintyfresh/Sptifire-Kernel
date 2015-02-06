@@ -44,7 +44,7 @@ $(image): $(kernel)
 $(kernel): $(objects)
 	$(CC) $(LDFLAGS) $@ $^ $(LDLIBS)
 
-kisrs.asm: kisrs.sh
+kisrs.asm: kisrs.sh isrdef.asm
 	sh kisrs.sh 33 > $@
 
 %.o: %.asm
