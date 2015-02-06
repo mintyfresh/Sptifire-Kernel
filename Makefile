@@ -1,12 +1,12 @@
 
-# XCC - Cross Compiler
-CC = $(XCC)
+# CC - Cross Compiler
+CC = i686-elf-gcc
+AS = i686-elf-as
 
 # XINC - Cross Include
 # Cross Compiler Flags
 CFLAGS  = -Wall -Werror -Wextra \
-	-ffreestanding -std=c11 -O2 \
-	-I $(XINC)
+	-ffreestanding -std=c11 -O2
 LDFLAGS = -T linker.ld -nostdlib \
 	-ffreestanding -O2 -o
 LDLIBS  = -lgcc
@@ -42,9 +42,6 @@ $(image): $(kernel)
 
 $(kernel): $(objects)
 	$(CC) $(LDFLAGS) $@ $^ $(LDLIBS)
-
-kisrs.o: kisrs.asm
-	yasm -p gas -f elf kisrs.asm -o kisrs.o
 
 %.o: %.asm
 	$(AS) $< -o $@

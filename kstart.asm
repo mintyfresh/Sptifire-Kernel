@@ -8,9 +8,9 @@
 .set MAGIC,		0x1BADB002
 .set CHECKSUM,	-(MAGIC + FLAGS)
 
-.set PRESENT,	1 << 0
-.set READWRITE,	1 << 1
-.set LARGEPAGE,	1 << 7
+.set PRESENT,	(1 << 0)
+.set READWRITE,	(1 << 1)
+.set LARGEPAGE,	(1 << 7)
 
 .set VOFFSET,	0xC0000000
 
@@ -19,22 +19,11 @@
 .section .mboot
 .align 4
 
+.global _mbootHeader
 _mbootHeader:
 	.long MAGIC
 	.long FLAGS
 	.long CHECKSUM
-
-# Kernel Page Directory
-
-.section .data
-.align 4096
-
-.global _pageDirectory
-_pageDirectory:
-	.long PRESENT | READWRITE | LARGEPAGE
-	.fill 768 - 1, 4, 0
-	.long PRESENT | READWRITE | LARGEPAGE
-	.fill 1024 - 786, 4, 0
 
 # Kernel Entry (Lower Half)
 
@@ -75,12 +64,23 @@ _start:
 	pushl %ebx # Multiboot Pointer
 	pushl %eax # Multiboot Magic
 
-	leal (kmain), %ecx
-	call *%ecx
+	call kmain
 
 _kHang:
 	hlt
 	jmp _kHang
+
+# Kernel Page Directory
+
+.section .data
+.align 4096
+
+.global _pageDirectory
+_pageDirectory:
+	.long PRESENT | READWRITE | LARGEPAGE
+	.fill 768 - 1, 4, 0
+	.long PRESENT | READWRITE | LARGEPAGE
+	.fill 1024 - 786, 4, 0
 
 # Kernel Stack
 

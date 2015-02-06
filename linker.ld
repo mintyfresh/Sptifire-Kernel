@@ -1,34 +1,34 @@
 OUTPUT_FORMAT(elf32-i386)
 ENTRY(_startLow)
 
+PHYSICAL = 0x00100000;
+VIRTUAL  = 0xC0000000;
+
 SECTIONS {
 
-	. = 0x00100000;
+	. = PHYSICAL;
 
 	_pstart = .;
 
-	.mboot ALIGN(4) : AT(ADDR(.mboot)) {
-		*(.mboot)
-		*(.textlow)
-	}
-
-	. += 0xC0000000;
+	. += VIRTUAL;
 
 	_vstart = .;
 
-	.text ALIGN(4) : AT(ADDR(.text) - 0xC0000000) {
+	.text ALIGN(4) : AT(ADDR(.text) - VIRTUAL) {
+		*(.mboot)
+		*(.textlow)
 		*(.text)
 	}
 
-	.rodata ALIGN(4) : AT(ADDR(.rodata) - 0xC0000000) {
+	.rodata ALIGN(4) : AT(ADDR(.rodata) - VIRTUAL) {
 		*(.rodata)
 	}
 
-	.data ALIGN(4K) : AT(ADDR(.data) - 0xC0000000) {
+	.data ALIGN(4K) : AT(ADDR(.data) - VIRTUAL) {
 		*(.data)
 	}
 
-	.bss ALIGN(32) : AT(ADDR(.bss) - 0xC0000000) {
+	.bss ALIGN(32) : AT(ADDR(.bss) - VIRTUAL) {
 		*(COMMON)
 		*(.bss)
 	}
