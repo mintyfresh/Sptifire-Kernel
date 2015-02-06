@@ -1,6 +1,7 @@
 
 # include "kernel.h"
 # include "kscreen.h"
+# include "hardware.h"
 
 __attribute__((noreturn))
 void hang() {
