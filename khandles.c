@@ -1,8 +1,9 @@
 
+# include "kernel.h"
 # include "kscreen.h"
 
 void isrHandle0() {
-	kprintf("ISR %d.\n", 0);
+	abort("Division by Zero!\n");
 }
 
 void isrHandle1() {

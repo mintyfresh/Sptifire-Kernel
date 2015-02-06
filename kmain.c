@@ -15,7 +15,7 @@ void kmain(int magic, void *mboot) {
 	kprintf("Loading IDT.\n");
 	idtInstall();
 
-	__asm__("int $5");
+	__asm__("int $2");
 
 	kprintf("Done.\n");
 
