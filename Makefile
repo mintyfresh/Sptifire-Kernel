@@ -21,7 +21,8 @@ objects =			\
 	kgdt.o			\
 	kidt.o			\
 	kisrs.o			\
-	khandles.o
+	khandles.o		\
+	kirqs.o
 
 # Output files
 bin     = ./bin
