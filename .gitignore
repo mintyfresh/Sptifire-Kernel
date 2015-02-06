@@ -2,3 +2,7 @@
 *.bin
 *.iso
 *.txt
+
+# Generated files
+kisrs.asm
+bochsrc.bxrc
