@@ -43,5 +43,8 @@ $(image): $(kernel)
 $(kernel): $(objects)
 	$(CC) $(LDFLAGS) $@ $^ $(LDLIBS)
 
+kisrs.o: kisrs.asm
+	yasm -p gas -f elf kisrs.asm -o kisrs.o
+
 %.o: %.asm
 	$(AS) $< -o $@
