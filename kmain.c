@@ -1,5 +1,6 @@
 
 # include "kgdt.h"
+# include "kidt.h"
 # include "kernel.h"
 # include "kscreen.h"
 # include "kstring.h"
@@ -10,6 +11,13 @@ void kmain(int magic, void *mboot) {
 
 	kprintf("Loading GDT.\n");
 	gdtInstall();
+
+	kprintf("Loading IDT.\n");
+	idtInstall();
+
+	int x = 1;
+	x = x / (x - 1);
+	kprintf("k : %d.\n", x);
 
 	kprintf("Done.\n");
 

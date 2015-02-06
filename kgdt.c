@@ -20,8 +20,8 @@ struct gdt_entry {
 	uint8_t base2;
 } __attribute__((packed));
 
-struct gdt_descriptor descriptor;
-struct gdt_entry entries[6];
+static struct gdt_descriptor descriptor;
+static struct gdt_entry entries[6];
 
 static int idx = 0;
 
@@ -33,9 +33,6 @@ void gdtInstall() {
 	gdtCreate(NULL, 0xFFFFFFFF, KERNEL_DATA);
 	gdtCreate(NULL, 0xFFFFFFFF, USER_CODE);
 	gdtCreate(NULL, 0xFFFFFFFF, USER_DATA);
-
-	descriptor.size = idx * sizeof(struct gdt_entry) - 1;
-	descriptor.offset = (uint32_t)(void *)&entries;
 
 	// Commit GDT structure
 	gdtCommit();
