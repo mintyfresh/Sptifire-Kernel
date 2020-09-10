@@ -52,7 +52,7 @@ void gdtCreate(void *base, size_t limit, int flags) {
 	entry->flags = (flags >> 8) & 0xF;
 }
 
-void gdtCommit() {
+__attribute__((noinline)) void gdtCommit() {
 	descriptor.size = sizeof(struct gdt_entry) * idx - 1;
 	descriptor.offset = (uint32_t)(void *)&entries;
 
